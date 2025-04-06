@@ -8,7 +8,7 @@
  *
  *  Name: Aaron Lo Student ID: 111918249 Date: 04/06/2025
  *
- *  Published URL: ___________________________________________________________
+ *  Published URL:
  *
  ********************************************************************************/
 
@@ -64,7 +64,7 @@ app.use(express.static("public"));
 // Initialize the projects (this will populate the projects array)
 projectData
   .initialize()
-  .then(authData.initialize) // Initialize the authentication module
+  .then(() => authData.initialize()) // Initialize the authentication module
   // If promise is resolved THEN
   .then(() => {
     console.log("Projects initialized successfully.");
