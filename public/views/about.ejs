@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link href="/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+<!-- Navbar -->
+<%- include('partials/navbar', { page: '/about' }) %>
+
+<!-- Hero Section -->
+<section class="hero bg-green-600 text-white py-12">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col items-center justify-center">
+      <div class="text-center mb-6">
+        <h1 class="text-5xl font-bold mb-4">About</h1>
+        <p class="mb-6">All about me, and my journey into programming.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- About Content -->
+  <section class="py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Image -->
+        <div class="flex justify-center items-center">
+          <img src="./img/snorlax.png" alt="Profile Image" class="w-[75%] h-auto object-cover">
+        </div>
+
+        <!-- About Me -->
+        <div class="flex flex-col justify-center">
+          <h2 class="text-2xl font-semibold mb-4">Hello, I'm Aaron!</h2>
+          <p class="text-lg text-gray-600">I'm currently in the Computer Programming Analysis program at Seneca College. I have knowledge in web development and I am currently studying back-end technologies. My goal is to combine these skills and become a full-stack developer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

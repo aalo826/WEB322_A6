@@ -1,0 +1,73 @@
+<!-- Navbar -->
+<nav class="sticky top-0 z-10 bg-green-800 text-white p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <a href="/" class="text-3xl font-bold">Climate Solutions</a>
+
+    <a href="/">
+      <div class="text-center">
+        <p>Aaron Lo - 111918429</p>
+      </div>
+    </a>
+
+    <a href="/">
+      <div class="text-center">
+        <p id="timestamp"></p>
+      </div>
+    </a>
+
+    <div class="flex space-x-4 items-center">
+      <!-- View Projects Link -->
+      <a
+        class="<%= (page == '/solutions/projects') ? 'active bg-green-900' : '' %>
+        text-lg px-4 py-2 rounded-md hover:bg-green-700"
+        href="/solutions/projects"
+      >
+        View Projects
+      </a>
+
+      <!-- About Link -->
+      <a
+        class="<%= (page == '/about') ? 'active bg-green-900' : '' %>
+        text-lg px-4 py-2 rounded-md hover:bg-green-700"
+        href="/about"
+      >
+        About
+      </a>
+
+      <% if (session && session.user) { %>
+        <!-- Authenticated User Dropdown -->
+          <div class="relative group">
+            <button class="text-lg px-4 py-2 rounded-md hover:bg-green-700">
+              Account: <%= session.user.userName %>
+            </button>
+            <ul class="absolute hidden group-hover:block bg-green-900 text-white rounded shadow-md right-0 w-full">
+              <li><a class="block px-4 py-2 hover:bg-green-700 <%= (page == '/solutions/addProject') ? 'bg-green-700' : '' %>" href="/solutions/addProject">Add Project</a></li>
+              <li><a class="block px-4 py-2 hover:bg-green-700 <%= (page == '/userHistory') ? 'bg-green-700' : '' %>" href="/userHistory">User History</a></li>
+              <li><a class="block px-4 py-2 hover:bg-green-700" href="/logout">Log Out</a></li>
+            </ul>
+          </div>
+      <% } else { %>
+        <!-- Unauthenticated User Dropdown -->
+        <div class="relative group">
+          <button class="text-lg px-4 py-2 rounded-md hover:bg-green-700">
+            Account
+          </button>
+          <ul class="absolute hidden group-hover:block bg-green-900 text-white rounded shadow-md right-0 w-full">
+            <li class="w-auto"><a class="block px-4 py-2 hover:bg-green-700 <%= (page == '/login') ? 'bg-green-700' : '' %>" href="/login">Login</a></li>
+            <li class="w-auto"><a class="block px-4 py-2 hover:bg-green-700 <%= (page == '/register') ? 'bg-green-700' : '' %>" href="/register">Register</a></li>
+          </ul>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Update timestamp
+  document.addEventListener("DOMContentLoaded", function () {
+    const currentDate = new Date().toLocaleDateString();  // Date
+    const currentTime = new Date().toLocaleTimeString();  // Time
+    const dateTimeString = `Date: ${currentDate}, Time: ${currentTime}`;
+    document.getElementById("timestamp").innerText = dateTimeString;
+  });
+</script>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= project.title %></title>
+    <link href="/css/main.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <%- include('partials/navbar', { page: '/solutions/projects' }) %>
+
+    <!-- Hero Section -->
+    <section class="hero bg-green-600 text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-6">
+          <h1 class="text-5xl font-bold mb-4"><%= project.title %></h1>
+          <p class="mb-6">
+            Below, you will find detailed information about the project: <%= project.title %>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Details Section -->
+    <section class="project-details py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Project Image -->
+          <div class="project-image">
+            <img
+              src="<%= project.feature_img_url %>"
+              alt="<%= project.title %>"
+              class="w-full h-auto rounded-lg"
+            />
+          </div>
+
+          <!-- Project Info -->
+          <div class="project-info">
+            <h2 class="text-3xl font-semibold mb-4">Project Overview</h2>
+            <p><strong>Short Intro:</strong> <%= project.intro_short %></p>
+            <p><strong>Impact:</strong> <%= project.impact %></p>
+            <p>
+              <strong>Original Source:</strong>
+              <a href="<%= project.original_source_url %>" target="_blank" class="text-blue-500"
+                >Learn more</a
+              >
+            </p>
+
+            <!-- Edit Button (Only visible to logged-in users) -->
+            <% if (session.user) { %>
+              <p class="pt-7">
+                <a href="/solutions/editProject/<%= project.id %>" class="btn btn-success text-white py-2 px-4 rounded bg-green-500 hover:bg-green-600">
+                  Edit Project
+                </a>
+              </p>
+            <% } %>
+
+            <!-- Back Button -->
+            <p class="pt-7">
+              <a href="/solutions/projects" class="btn">
+                Back to Projects
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="quote-section py-8 bg-gray-100">
+      <div class="container mx-auto px-4">
+        <blockquote id="quote" class="text-center italic text-xl font-semibold"></blockquote>
+        <p id="quote-author" class="text-center"></p>
+      </div>
+    </section>
+
+    <script>
+      // Fetch Random Quote
+      document.addEventListener("DOMContentLoaded", () => {
+        // Fetch quote from dummyjson API
+        fetch("https://dummyjson.com/quotes/random")
+          .then((response) => response.json())
+          .then((data) => {
+            // Put quote and author using DOM
+            document.getElementById("quote").textContent = `"${data.quote}"`;
+            document.getElementById("quote-author").textContent = `- ${data.author}`;
+          })
+          .catch((error) => {
+            console.error("Error fetching quote:", error);
+          });
+      });
+    </script>
+  </body>
+</html>

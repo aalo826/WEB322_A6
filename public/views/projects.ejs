@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us</title>
+    <link href="/css/main.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <%- include('partials/navbar', { page: '/solutions/projects' }) %>
+    <!-- Hero Section -->
+    <section class="hero bg-green-600 text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-6">
+          <h1 class="text-5xl font-bold mb-4">Projects</h1>
+          <p class="mb-6">
+            Browse the current list of Projects in our database. Click the theme to filter by
+            sectors such as:
+          </p>
+          <!-- Buttons to filter by sector -->
+          <div>
+            <a href="/solutions/projects?sector=Land Sinks" class="btn">Land Sinks</a>
+            <a href="/solutions/projects?sector=Industry" class="btn">Industry</a>
+            <a href="/solutions/projects?sector=Transportation" class="btn">Transportation</a>
+            <a href="/solutions/projects?sector=Electricity" class="btn">Electricity</a>
+            <a href="/solutions/projects?sector=Food, Agriculture, and Land Use" class="btn">
+              Food, Agriculture, and Land Use
+            </a>
+            <a href="/solutions/projects" class="btn">All Projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Table -->
+    <section class="projects-table py-12">
+      <div class="container mx-auto px-4">
+        <table class="table-auto w-full border-collapse">
+          <thead>
+            <tr>
+              <th class="px-4 py-2">Title</th>
+              <th class="px-4 py-2">Sector</th>
+              <th class="px-4 py-2">Summary</th>
+              <th class="px-4 py-2">Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% projects.forEach(project => { %>
+            <tr>
+              <td class="px-4 py-2"><%= project.title %></td>
+              <td class="px-4 py-2">
+                <% if (project.Sector) { %>
+                <a href="/solutions/projects?sector=<%= project.Sector.sector_name %>" class="btn">
+                  <%= project.Sector.sector_name %>
+                </a>
+                <% } else { %> No sector available <% } %>
+              </td>
+              <td class="px-4 py-2"><%= project.summary_short %></td>
+              <td class="px-4 py-2">
+                <a href="/solutions/projects/<%= project.id %>" class="btn">Details</a>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login History</title>
+    <link href="/css/main.css" rel="stylesheet">
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navbar -->
+    <%- include('partials/navbar', { page: '/userHistory' }) %>
+
+    <!-- Hero Section -->
+    <section class="hero bg-green-600 text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="text-center">
+          <h1 class="text-4xl font-bold mb-4">Welcome, <%= session.user.userName %></h1>
+          <p class="text-lg">Email: <%= session.user.email %></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Login History Table -->
+    <section class="py-12">
+      <div class="container mx-auto px-4">
+        <h2 class="text-2xl font-semibold mb-6 text-center text-gray-800">Login History</h2>
+        <div class="overflow-x-auto">
+          <table class="table w-full bg-white rounded-lg shadow-md">
+            <thead class="bg-green-600 text-white">
+              <tr>
+                <th class="text-left px-6 py-3">Login Date / Time</th>
+                <th class="text-left px-6 py-3">Client Information</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (session.user.loginHistory && session.user.loginHistory.length > 0) { %>
+                <% session.user.loginHistory.forEach(entry => { %>
+                  <tr class="hover:bg-gray-100 border-b">
+                    <td class="px-6 py-4"><%= new Date(entry.dateTime).toLocaleString() %></td>
+                    <td class="px-6 py-4"><%= entry.userAgent %></td>
+                  </tr>
+                <% }) %>
+              <% } else { %>
+                <tr>
+                  <td class="px-6 py-4 text-center text-gray-500" colspan="2">
+                    No login history found.
+                  </td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

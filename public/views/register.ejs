@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Register - Climate Solutions</title>
+    <link href="/css/main.css" rel="stylesheet">
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navbar -->
+    <%- include('partials/navbar', { page: '/register' }) %>
+
+    <!-- Register Section -->
+    <section class="hero bg-green-600 text-white py-12">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-4">Register</h1>
+        <p class="text-lg">Create your account and contribute to climate solutions</p>
+      </div>
+    </section>
+
+    <section class="py-12">
+      <div class="container mx-auto px-4 max-w-xl bg-white shadow-md rounded-lg p-6">
+        <% if (!successMessage) { %>
+      <form method="POST" action="/register" class="space-y-6">
+        <div class="space-y-2">
+          <label for="userName" class="block text-sm font-medium text-gray-700">User Name</label>
+          <input id="userName" type="text" name="userName" placeholder="User Name" required value="<%= userName || '' %>" class="input input-bordered w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"/>
+        </div>
+
+        <div class="space-y-2">
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input id="password" type="password" name="password" placeholder="Password" required class="input input-bordered w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"/>
+        </div>
+
+        <div class="space-y-2">
+          <label for="password2" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+          <input id="password2" type="password" name="password2" placeholder="Confirm Password" required class="input input-bordered w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"/>
+        </div>
+
+        <div class="space-y-2">
+          <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+          <input id="email" type="email" name="email" placeholder="Email Address" required class="input input-bordered w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary bg-green-600 text-white hover:bg-green-700 w-auto px-6 py-2 mt-4">Register</button>
+      </form>
+      <% if (errorMessage) { %>
+        <div class="alert alert-error mt-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span><%= errorMessage %></span>
+        </div>
+      <% } %>
+    <% } else { %>
+      <!-- Success Message -->
+      <div class="alert alert-success mt-4 p-4 bg-green-100 text-green-800 rounded-md shadow-md">
+        <p class="font-medium text-center"><%= successMessage %></p>
+      </div>
+      <br/>
+      <a href="/login" class="btn btn-success w-full mt-4">Proceed to Log in</a>
+    <% } %>
+      </div>
+    </section>
+  </body>
+</html>
